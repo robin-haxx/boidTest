@@ -11,7 +11,9 @@ function setup() {
     cohesionSlider = createSlider(0, 2, 0.45, 0.1);
     separationSlider = createSlider(0, 2, 0.5, 0.1);
     boidButtonPlus = createButton("+1 Boid");
+    boidButtonPlus10 = createButton("+10 Boid");
     boidButtonMinus = createButton("-1 Boid");
+    boidClear = createButton("Clear Boids");
     let boidCount = 1;
     for(let i = 0; i < boidCount; i++){ 
     flock.push(new Boid());
@@ -36,9 +38,20 @@ function draw() {
       flock.push(new Boid());
     });
 
+    boidButtonPlus10.mousePressed(() => {
+      for (let i = 0; i < 10; i++){flock.push(new Boid());};
+    });
+
     boidButtonMinus.mousePressed(() => {
       flock.pop();
     });
+
+    boidClear.mousePressed(() => {
+      while (flock.length > 0){
+        flock.pop();
+      }
+    }
+    )
 
     for(let boid of flock) {
       boid.flock(flock);
